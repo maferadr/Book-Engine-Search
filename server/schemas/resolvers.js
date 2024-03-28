@@ -3,20 +3,15 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        user: async (parent, { _id })=>{
-            const foundUser = _id ? {_id} : {};
-            await User.findOne(foundUser._id);
-
-            if(!foundUser){
-                return `Couldn't find an user with this ID.`
-            }
+        me: async (parent, { _id })=>{
+            return User.findOne({ _id }).populate('savedBooks')
         },
-        books: async (parent, {bookId})=>{
-            Book.findById(bookId).populate('user')
-        },
+        // books: async (parent, {bookId})=>{
+        //     Book.findById(bookId).populate('user')
+        // },
     },
     Mutation: {
-        createUser: async (parent, args)=>{
+        addUser: async (parent, args)=>{
             const user = await User.create(args);
             const token = signToken(user);
 

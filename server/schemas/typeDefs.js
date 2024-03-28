@@ -8,7 +8,7 @@ const typeDefs = `
     }
 
     type Book {
-        bookId: [bookSchema]
+        bookId: ID!
         authors: [String]
         description: String!
         title: String!
@@ -16,7 +16,7 @@ const typeDefs = `
         link: String
     }
 
-    type Auth {s
+    type Auth {
         token: ID
         user: User
     }
@@ -42,9 +42,11 @@ const typeDefs = `
             image: String
             link: String
             title: String!
-        )
+        ): User
         removeBook(
-            bookId: ID
+            bookId: ID!
         ): User
     }
 `
+
+module.exports = typeDefs;
