@@ -16,7 +16,7 @@ const typeDefs = `
         link: String
     }
 
-    type Auth {
+    type Auth {s
         token: ID
         user: User
     }
